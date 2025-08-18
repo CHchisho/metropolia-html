@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metropolia restaurants</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="menu.css" />
+  <link rel="stylesheet" href="filter.css" />
+  <link rel="stylesheet" href="restaurants-list.css" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin="" />
+  <!-- Leaflet JavaScript -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+          crossorigin=""></script>
+</head>
+<body>
+<div class="navigation">
+  <button class="nav-button">Home</button>
+</div>
+
+<div class="restaurants-list" id="restaurants-list"></div>
+
+<div class="filters-panel" id="filters-panel">
+  <div class="filters-header">
+    <h3>Filters</h3>
+    <button id="toggle-filters" class="toggle-button">
+      <span class="toggle-text">Hide</span>
+      <span class="toggle-icon">▼</span>
+    </button>
+  </div>
+  <div class="filters-content" id="filters-content">
+    <div class="filter-group">
+      <label for="city-filter">City:</label>
+      <select id="city-filter" class="filter-select">
+        <option value="">All cities</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label for="company-filter">Company:</label>
+      <select id="company-filter" class="filter-select">
+        <option value="">All companies</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label for="search-filter">Search by name:</label>
+      <input type="text" id="search-filter" class="filter-input" placeholder="Enter restaurant name...">
+    </div>
+    <div class="filter-actions">
+      <button id="clear-filters" class="clear-filters-btn">Clear filters</button>
+      <span id="filter-results" class="filter-results"></span>
+    </div>
+  </div>
+</div>
+
+<div id="app">
+  <div class="map-container">
+    <div id="map"></div>
+  </div>
+</div>
+
+<div id="restaurant-info"></div>
+
+<script src="index.js"></script>
+</body>
+</html>
