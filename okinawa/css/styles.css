@@ -1,3 +1,15 @@
+:root {
+  --primary-100: #590d22;
+  --primary-200: #800f2f;
+  --primary-300: #a4133c;
+  --primary-350: #c9184a;
+  --primary-400: #ff4d6d;
+  --primary-500: #ff758f;
+  --primary-600: #ff8fa3;
+  --primary-700: #ffb3c1;
+  --primary-800: #ffccd5;
+  --primary-900: #fff0f3;
+}
 
 body {
   margin: 0;
@@ -34,9 +46,11 @@ p {
 
 header {
   position: sticky;
-  background-color: #FF4D6D;
+  background-color: var(--primary-400);
   height: 60px;
   box-shadow: 0 4px 10px 0px rgb(0 0 0 / 70%);
+  text-align: justify;
+  text-align-last: justify;
 }
 
 header h1 {
@@ -74,7 +88,30 @@ header nav ul li a {
 
 header nav ul li a:hover {
   text-decoration: underline;
-  color: #FFCCD5;
+  color: var(--primary-800);
+}
+
+header .header-buttons {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: right;
+  margin-right: 36px;
+}
+
+header .header-buttons button {
+  background-color: var(--primary-600);
+  border-radius: 8px;
+  color: white;
+  padding: 8px;
+  min-width: 36px;
+  min-height: 36px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+}
+
+header .header-buttons button:hover {
+  background-color: var(--primary-700);
 }
 
 
@@ -88,8 +125,8 @@ header nav ul li a:hover {
   width: 100%;
   padding: 32px;
   margin-top: 100px;
-  background-color: #FFCCD5;
-  background-image: url('images/bg-item.png');
+  background-color: var(--primary-800);
+  background-image: url('../images/bg-item.png');
   background-size: 100px;
   background-position: right bottom;
   background-repeat: repeat;
@@ -141,7 +178,7 @@ header nav ul li a:hover {
 
 
 footer {
-  background-color: #590D22;
+  background-color: var(--primary-100);
   width: 100%;
   height: 60px;
 }
@@ -151,4 +188,77 @@ footer p {
   text-align: center;
   margin: auto;
   padding-block: 16px;
+}
+
+
+
+
+
+
+.user-login-dialog {
+  border: none;
+  width: 300px;
+  background-color: white;
+  border-radius: 16px;
+}
+
+.user-login-dialog .close-user-login-dialog-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--primary-900);
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.user-login-dialog .close-user-login-dialog-button:hover {
+  background-color: var(--primary-800);
+}
+
+.user-login-dialog > h2 {
+  margin-bottom: 8px;
+}
+
+.user-login-dialog form > input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  border: 1px solid var(--primary-900);
+}
+
+.user-login-dialog form > input:focus {
+  outline: none;
+  border: 1px solid var(--primary-800);
+}
+
+.user-login-dialog form > input:hover {
+  border: 1px solid var(--primary-800);
+}
+
+.user-login-dialog form > input:invalid {
+  border: 1px solid red;
+}
+
+.user-login-dialog form > input:valid {
+  border: 1px solid lightgreen;
+}
+.user-login-dialog .user-login-dialog-buttons {
+  margin-top: 16px;
+}
+
+.user-login-dialog .user-login-dialog-buttons > button {
+  border-radius: 4px;
+  background-color: var(--primary-900);
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.user-login-dialog .user-login-dialog-buttons > button:hover {
+  background-color: var(--primary-800);
 }
