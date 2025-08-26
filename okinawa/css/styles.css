@@ -191,10 +191,6 @@ footer p {
 }
 
 
-
-
-
-
 .user-login-dialog {
   border: none;
   width: 300px;
@@ -246,6 +242,7 @@ footer p {
 .user-login-dialog form > input:valid {
   border: 1px solid lightgreen;
 }
+
 .user-login-dialog .user-login-dialog-buttons {
   margin-top: 16px;
 }
