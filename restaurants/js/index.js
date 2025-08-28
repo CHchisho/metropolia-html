@@ -1,41 +1,13 @@
 var restaurants = [];
 var filteredRestaurants = [];
 var map = null;
+var userLocation = null;
 var filters = {
   city: '',
   company: '',
   search: ''
 };
 
-function getRestaurants() {
-  fetch('https://media1.edu.metropolia.fi/restaurant/api/v1/restaurants')
-    .then((res) => res.json())
-    .then((data) => {
-      restaurants = data;
-      filteredRestaurants = [...restaurants];
-      initializeFilters();
-      addRestaurantMarkers();
-      createRestaurantsList();
-    })
-}
-
-function getRestaurantDailyMenu(id) {
-  return fetch(`https://media1.edu.metropolia.fi/restaurant/api/v1/restaurants/daily/${id}/en`)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      return data;
-    });
-}
-
-function getRestaurantWeeklyMenu(id) {
-  return fetch(`https://media1.edu.metropolia.fi/restaurant/api/v1/restaurants/weekly/${id}/en`)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      return data;
-    });
-}
 
 function initMap() {
   if (map) {
@@ -54,34 +26,6 @@ function initMap() {
 
   // load restaurants data
   getRestaurants();
-}
-
-// Function to add restaurant markers
-function addRestaurantMarkers() {
-  if (!map || !filteredRestaurants) return;
-
-  filteredRestaurants.forEach(restaurant => {
-    if (restaurant.location && restaurant.location.coordinates) {
-      const lat = restaurant.location.coordinates[1];
-      const lng = restaurant.location.coordinates[0];
-
-      const marker = L.marker([lat, lng]).addTo(map);
-
-      const popupContent = `
-        <div style="min-width: 200px;">
-          <h3 style="margin: 0 0 10px 0; color: #333;">${restaurant.name}-${restaurant.company}</h3>
-          <p style="margin: 5px 0; color: #666;">${restaurant.address || 'Address not specified'}</p>
-          <p style="margin: 5px 0; color: #666;">${restaurant.postalCode} ${restaurant.city}</p>
-          <div class="popup-buttons">
-            <button onclick="showRestaurantDailyMenu('${restaurant._id}')">Daily menu</button>
-            <button onclick="showRestaurantWeeklyMenu('${restaurant._id}')">Weekly menu</button>
-          </div>
-        </div>
-      `;
-
-      marker.bindPopup(popupContent);
-    }
-  });
 }
 
 
@@ -161,7 +105,7 @@ function createMenuTable(menuData) {
 
 // function to create weekly menu table
 function createWeeklyMenuTable(menuData) {
-	console.log("menuData",menuData);
+  console.log('menuData', menuData);
   if (!menuData || !Array.isArray(menuData.days) || menuData.days.length === 0) {
     return '<p>No weekly menu data available</p>';
   }
@@ -243,7 +187,7 @@ function initializeFilters() {
   const toggleText = toggleFiltersButton.querySelector('.toggle-text');
   const toggleIcon = toggleFiltersButton.querySelector('.toggle-icon');
 
-  toggleFiltersButton.addEventListener('click', function() {
+  toggleFiltersButton.addEventListener('click', function () {
     const isHidden = filtersContent.classList.contains('collapsed');
 
     if (isHidden) {
@@ -314,13 +258,40 @@ function updateMapMarkers() {
     }
   });
 
+  // find the nearest restaurant if user location is available
+  const nearestRestaurant = findNearestRestaurant();
+  if (nearestRestaurant && userLocation) {
+    console.log('nearestRestaurant', nearestRestaurant, userLocation, calculateDistance(userLocation.lat, userLocation.lng, nearestRestaurant.location.coordinates[1], nearestRestaurant.location.coordinates[0]));
+  } else {
+    console.error('no nearest restaurant', nearestRestaurant, userLocation);
+  }
+
+  console.log('filteredRestaurants');
   // add markers only for filtered restaurants
   filteredRestaurants.forEach(restaurant => {
     if (restaurant.location && restaurant.location.coordinates) {
       const lat = restaurant.location.coordinates[1];
       const lng = restaurant.location.coordinates[0];
 
-      const marker = L.marker([lat, lng]).addTo(map);
+      // Create custom icon for nearest restaurant (green) or default icon
+      let markerIcon;
+      if (nearestRestaurant && restaurant._id === nearestRestaurant._id) {
+        // Green icon for nearest restaurant
+        markerIcon = L.divIcon({
+          className: 'custom-marker nearest-marker',
+          iconSize: [20, 20],
+          iconAnchor: [10, 10]
+        });
+      } else {
+        // Default red icon for other restaurants
+        markerIcon = L.divIcon({
+          className: 'custom-marker',
+          iconSize: [20, 20],
+          iconAnchor: [10, 10]
+        });
+      }
+
+      const marker = L.marker([lat, lng], { icon: markerIcon }).addTo(map);
 
       const popupContent = `
         <div style="min-width: 200px;">
@@ -337,6 +308,12 @@ function updateMapMarkers() {
       marker.bindPopup(popupContent);
     }
   });
+
+  if (userLocation) {
+    const userMarker = L.marker([userLocation.lat, userLocation.lng]).addTo(map);
+    userMarker.bindPopup('<div style="text-align: center;"><strong>Your current location</strong></div>');
+  }
+
 }
 
 // function to update filter results counter
@@ -370,11 +347,10 @@ function createRestaurantsList() {
   `;
 
   if (!filteredRestaurants || filteredRestaurants.length === 0) {
-    listHTML+= '<p>No restaurants found</p>';
-  }
-  else {
-  filteredRestaurants.forEach(restaurant => {
-    listHTML += `
+    listHTML += '<p>No restaurants found</p>';
+  } else {
+    filteredRestaurants.forEach(restaurant => {
+      listHTML += `
       <div class="restaurant-card">
         <div class="restaurant-header">
           <h3 class="restaurant-name">${restaurant.name}</h3>
@@ -398,7 +374,7 @@ function createRestaurantsList() {
         </div>
       </div>
     `;
-  });
+    });
   }
 
   listHTML += `
@@ -417,7 +393,7 @@ function createRestaurantsList() {
   const toggleText = toggleButton.querySelector('.toggle-text');
   const toggleIcon = toggleButton.querySelector('.toggle-icon');
 
-  toggleButton.addEventListener('click', function() {
+  toggleButton.addEventListener('click', function () {
     const isHidden = restaurantsGrid.classList.contains('collapsed');
 
     if (isHidden) {

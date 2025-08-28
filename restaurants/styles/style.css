@@ -22,7 +22,10 @@ p {
   font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
   'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
-* {box-sizing: border-box;}
+
+* {
+  box-sizing: border-box;
+}
 
 button {
   background: #575757;
@@ -90,4 +93,18 @@ button:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   max-height: 90vh;
   overflow-y: auto;
+}
+
+
+.custom-marker {
+  background-color: #3540dc;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.nearest-marker {
+  background-color: #28a745;
 }
