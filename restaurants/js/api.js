@@ -9,7 +9,7 @@ function getRestaurants() {
       // Get user location after loading restaurants
       try {
         await getUserLocation();
-        console.log('getUserLocation', userLocation);
+        // console.log('getUserLocation', userLocation);
       } catch (error) {
         console.log('Error getting user location:', error);
       }

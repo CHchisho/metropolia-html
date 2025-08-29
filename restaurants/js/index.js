@@ -260,13 +260,12 @@ function updateMapMarkers() {
 
   // find the nearest restaurant if user location is available
   const nearestRestaurant = findNearestRestaurant();
-  if (nearestRestaurant && userLocation) {
-    console.log('nearestRestaurant', nearestRestaurant, userLocation, calculateDistance(userLocation.lat, userLocation.lng, nearestRestaurant.location.coordinates[1], nearestRestaurant.location.coordinates[0]));
-  } else {
-    console.error('no nearest restaurant', nearestRestaurant, userLocation);
-  }
+  // if (nearestRestaurant && userLocation) {
+  //   console.log('nearestRestaurant', nearestRestaurant, userLocation, calculateDistance(userLocation.lat, userLocation.lng, nearestRestaurant.location.coordinates[1], nearestRestaurant.location.coordinates[0]));
+  // } else {
+  //   console.error('no nearest restaurant', nearestRestaurant, userLocation);
+  // }
 
-  console.log('filteredRestaurants');
   // add markers only for filtered restaurants
   filteredRestaurants.forEach(restaurant => {
     if (restaurant.location && restaurant.location.coordinates) {

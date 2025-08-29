@@ -1,0 +1,22 @@
+.user-info-content {
+  display: flex;
+  flex-direction: column;
+  /* gap: 16px; */
+}
+
+.user-info-content div {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.user-info-content div p:first-child {
+  font-weight: bold;
+}
+
+.user-info-content img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}

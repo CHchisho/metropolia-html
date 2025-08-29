@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="styles/menu.css" />
   <link rel="stylesheet" href="styles/filter.css" />
   <link rel="stylesheet" href="styles/restaurants-list.css" />
+  <link rel="stylesheet" href="styles/user-login.css" />
+  <link rel="stylesheet" href="styles/user-info.css" />
+
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
@@ -16,10 +19,15 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
           integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
           crossorigin=""></script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
 <div class="navigation">
   <button class="nav-button">Home</button>
+  <button id="header-user-button"><i class="bi bi-person-fill"></i></button>
 </div>
 
 <div class="restaurants-list" id="restaurants-list"></div>
@@ -64,8 +72,47 @@
   </div>
 </div>
 
+<dialog id="user-login-dialog" class="user-login-dialog">
+  <h2 id="dialog-title">Kirjaudu sisään</h2>
+  <button id="close-user-login-dialog-button"
+          class="close-user-login-dialog-button"><i class="bi bi-x-lg"></i>
+  </button>
+  <form id="user-form">
+    <input type="text" placeholder="Nimi" pattern="^[a-zA-Z]{4,}$"
+           id="login-user-name"
+           title="Name must be at least 4 characters" value="Ilia" required>
+    <input type="email" placeholder="Sähköposti" pattern=".*@metropolia\.fi$"
+           id="login-user-email" value="ilia.chebanik@metropolia.fi"
+           title="Email must end with @metropolia.fi" required>
+    <input type="password" placeholder="Salasana"
+           pattern="^(?=.*[A-Z])(?=.*\d).{5,}$" id="login-user-password"
+           value="A1234"
+           title="Password must contain at least one uppercase letter, one digit and at least 5 characters"
+           required>
+    <div class="user-login-dialog-buttons">
+      <button type="button" id="login-button">Kirjaudu</button>
+      <button type="button" id="register-button">Rekisteröidy</button>
+    </div>
+  </form>
+</dialog>
+
+
+<dialog id="user-info-dialog" class="user-login-dialog">
+  <h2 id="dialog-title">User info</h2>
+  <button id="close-user-info-dialog-button"
+    class="close-user-login-dialog-button"><i class="bi bi-x-lg"></i>
+  </button>
+  <div class="user-info-content"></div>
+  <div class="user-login-dialog-buttons">
+    <button type="button" id="logout-button">Kirjaudu ulos</button>
+  </div>
+</dialog>
+
+
 <div id="restaurant-info"></div>
 
+<script src="js/user-info.js"></script>
+<script src="js/user-login.js"></script>
 <script src="js/api.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/index.js"></script>

@@ -1,0 +1,78 @@
+
+.user-login-dialog {
+  border: none;
+  width: 300px;
+  background-color: white;
+  border-radius: 16px;
+}
+
+.user-login-dialog .close-user-login-dialog-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--primary-400);
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.user-login-dialog .close-user-login-dialog-button:hover {
+  background-color: var(--primary-300);
+}
+
+.user-login-dialog > h2 {
+  margin-bottom: 8px;
+}
+
+.user-login-dialog form > input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  border: 1px solid var(--primary-400);
+}
+
+.user-login-dialog form > input:focus {
+  outline: none;
+  border: 1px solid var(--primary-300);
+}
+
+.user-login-dialog form > input:hover {
+  border: 1px solid var(--primary-300);
+}
+
+.user-login-dialog form > input:invalid {
+  border: 1px solid red;
+}
+
+.user-login-dialog form > input:valid {
+  border: 1px solid lightgreen;
+}
+
+/* Скрытие поля email в режиме логина */
+/* .user-login-dialog form > input[type="email"] {
+  transition: all 0.3s ease;
+} */
+
+.user-login-dialog form > input[type="email"].hidden {
+  display: none !important;
+}
+
+.user-login-dialog .user-login-dialog-buttons {
+  margin-top: 16px;
+}
+
+.user-login-dialog .user-login-dialog-buttons > button {
+  border-radius: 4px;
+  background-color: var(--primary-400);
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.user-login-dialog .user-login-dialog-buttons > button:hover {
+  background-color: var(--primary-300);
+}

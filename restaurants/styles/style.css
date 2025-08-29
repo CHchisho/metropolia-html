@@ -1,3 +1,7 @@
+:root {
+  --primary-300: #575757;
+  --primary-400: #707070;
+}
 
 body {
   margin: 0;
