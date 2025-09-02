@@ -123,6 +123,7 @@ header .header-buttons button:hover {
 .hero-content {
   width: 100%;
   height: 600px;
+  max-height: 80vh;
   background-image: url('https://www.kikkoman.fi/fileadmin/_processed_/4/2/csm_sushi-kakkoii_2c56fe3133.webp');
   background-size: cover;
   background-position: center;
