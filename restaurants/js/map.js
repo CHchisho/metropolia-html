@@ -64,9 +64,15 @@ function updateMapMarkers() {
 
       const popupContent = `
         <div style="min-width: 200px;">
-          <h3 style="margin: 0 0 10px 0; color: #333;">${restaurant.name}-${restaurant.company}</h3>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h3 style="margin: 0; color: #333;">${restaurant.name}-${restaurant.company}</h3>
+            <span class="favorite-button" data-restaurant-id="${restaurant._id}" title="Add to favorites" style="cursor: pointer; color: #666; font-size: 18px;">
+              <i class="bi ${restaurant._id === currentUser?.favouriteRestaurant ? 'bi-heart-fill' : 'bi-heart'}"></i>
+            </span>
+          </div>
           <p style="margin: 5px 0; color: #666;">${restaurant.address || 'Address not specified'}</p>
           <p style="margin: 5px 0; color: #666;">${restaurant.postalCode} ${restaurant.city}</p>
+          <p style="margin: 5px 0; color: #666;">${restaurant._id}</p>
           <div class="popup-buttons">
             <button onclick="showRestaurantDailyMenu('${restaurant._id}')">Daily menu</button>
             <button onclick="showRestaurantWeeklyMenu('${restaurant._id}')">Weekly menu</button>
@@ -75,6 +81,11 @@ function updateMapMarkers() {
       `;
 
       marker.bindPopup(popupContent);
+      
+      // Add event listener for popup open to handle favorite buttons
+      marker.on('popupopen', function() {
+        addFavoriteButtonListeners();
+      });
     }
   });
 

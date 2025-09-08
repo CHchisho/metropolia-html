@@ -68,14 +68,18 @@
 }
 
 .restaurant-header {
-  margin-bottom: 15px;
+  margin-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .restaurant-name {
   color: #333;
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
+  flex: 1;
 }
 
 .restaurant-company {
@@ -86,10 +90,12 @@
 
 .restaurant-info {
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .restaurant-info p {
-  margin-bottom: 8px;
   font-size: 14px;
   color: #555;
 }
@@ -120,4 +126,27 @@
 
 .menu-button:hover {
   background: #707070;
+}
+
+/* Favorite button styles */
+.favorite-button {
+  cursor: pointer;
+  color: #ccc;
+  font-size: 18px;
+  transition: color 0.2s, transform 0.2s;
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+
+.favorite-button:hover {
+  color: #e74c3c;
+  transform: scale(1.1);
+}
+
+.favorite-button i {
+  transition: all 0.2s;
+}
+
+.favorite-button .bi-heart-fill {
+  color: #e74c3c;
 }

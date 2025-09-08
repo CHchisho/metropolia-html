@@ -59,6 +59,10 @@ function GetCurrentUserByToken(token) {
   })
     .then(async (res) => {
       let data = await res.json();
+      if (res.status === 400) {
+        alert('Not authorized!');
+        throw new Error('Not authorized!');
+      }
       if (res.status !== 200) {
         throw new Error('Server error. Try again later!');
       }

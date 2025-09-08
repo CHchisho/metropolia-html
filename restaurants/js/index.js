@@ -47,9 +47,14 @@ function createRestaurantsList() {
       <div class="restaurant-card">
         <div class="restaurant-header">
           <h3 class="restaurant-name">${restaurant.name}</h3>
-          <span class="restaurant-company">${restaurant.company}</span>
+          <span class="favorite-button" data-restaurant-id="${restaurant._id}" title="Add to favorites">
+            <i class="bi ${restaurant._id === currentUser?.favouriteRestaurant ? 'bi-heart-fill' : 'bi-heart'}"></i>
+          </span>
         </div>
         <div class="restaurant-info">
+          <p class="restaurant-company">
+            ${restaurant.company || 'Not specified'}
+          </p>
           <p class="restaurant-address">
             <strong>Address:</strong> ${restaurant.address || 'Not specified'}
           </p>
@@ -77,6 +82,9 @@ function createRestaurantsList() {
 
   restaurantsListContainer.innerHTML = listHTML;
 
+  // Add event listeners for favorite buttons
+  addFavoriteButtonListeners();
+
   // update filter results counter
   updateFilterResults();
 
@@ -98,6 +106,37 @@ function createRestaurantsList() {
       toggleText.textContent = 'Show';
       toggleIcon.textContent = '▶';
     }
+  });
+}
+
+// Function to add event listeners for favorite buttons
+function addFavoriteButtonListeners() {
+  const favoriteButtons = document.querySelectorAll('.favorite-button');
+  console.log('addFavoriteButtonListeners', currentUser?.favouriteRestaurant);
+  favoriteButtons.forEach(button => {
+    button.addEventListener('click', async function() {
+      const restaurantId = this.getAttribute('data-restaurant-id');
+      if (restaurantId) {
+        try {
+          await updateUser(null, null, null, restaurantId);
+          currentUser = await GetCurrentUserByToken(localStorage.getItem('authToken'));
+          // console.log('GetCurrentUserByToken -> currentUser', currsentUser?.favouriteRestaurant);
+          // Visual feedback - change heart color
+          favoriteButtons.forEach(button => {
+            button.querySelector('i').classList.remove('bi-heart');
+            button.querySelector('i').classList.remove('bi-heart-fill');
+            if (button.getAttribute('data-restaurant-id') === currentUser?.favouriteRestaurant) {
+              button.querySelector('i').classList.add('bi-heart-fill');
+            }
+            else {
+              button.querySelector('i').classList.add('bi-heart');
+            }
+          });
+        } catch (error) {
+          console.error('Error adding to favorites:', error);
+        }
+      }
+    });
   });
 }
 

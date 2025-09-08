@@ -48,10 +48,13 @@ function updateUser(username = null, email = null, avatar = null, favouriteResta
   if (avatar) {
     body.avatar = avatar;
   }
-  if (favouriteRestaurant) {
+  if (favouriteRestaurant && favouriteRestaurant !== currentUser?.favouriteRestaurant) {
     body.favouriteRestaurant = favouriteRestaurant;
   }
-  console.log(body);
+  console.log('updateUser: ', body);
+  if (Object.keys(body).length === 0 || currentUser == null) {
+    return;
+  }
   return fetch(`https://media1.edu.metropolia.fi/restaurant/api/v1/users`, {
     method: 'PUT',
     headers: {
