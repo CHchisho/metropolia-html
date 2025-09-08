@@ -1,7 +1,8 @@
 
 .user-login-dialog {
   border: none;
-  width: 300px;
+  width: fit-content;
+  max-width: 50vw;
   background-color: white;
   border-radius: 16px;
 }
@@ -10,6 +11,8 @@
   position: absolute;
   top: 10px;
   right: 10px;
+  width: 32px;
+  height: 32px;
   background-color: var(--primary-400);
   border: none;
   cursor: pointer;
@@ -21,8 +24,26 @@
   background-color: var(--primary-300);
 }
 
+.user-login-dialog .edit-user-login-dialog-button {
+  position: absolute;
+  top: 10px;
+  right: 48px;
+  width: 32px;
+  height: 32px;
+  background-color: var(--primary-400);
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.user-login-dialog .edit-user-login-dialog-button:hover {
+  background-color: var(--primary-300);
+}
+
 .user-login-dialog > h2 {
   margin-bottom: 8px;
+  margin-right: 40px;
 }
 
 .user-login-dialog form > input {

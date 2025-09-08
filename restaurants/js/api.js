@@ -36,3 +36,28 @@ function getRestaurantWeeklyMenu(id) {
       return data;
     });
 }
+
+function updateUser(username = null, email = null, avatar = null, favouriteRestaurant = null) {
+  let body = {};
+  if (username) {
+    body.username = username;
+  }
+  if (email) {
+    body.email = email;
+  }
+  if (avatar) {
+    body.avatar = avatar;
+  }
+  if (favouriteRestaurant) {
+    body.favouriteRestaurant = favouriteRestaurant;
+  }
+  console.log(body);
+  return fetch(`https://media1.edu.metropolia.fi/restaurant/api/v1/users`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  });
+}

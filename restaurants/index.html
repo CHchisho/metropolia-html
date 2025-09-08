@@ -102,10 +102,28 @@
   <button id="close-user-info-dialog-button"
           class="close-user-login-dialog-button"><i class="bi bi-x-lg"></i>
   </button>
+  <button id="edit-user-info-button"
+          class="edit-user-login-dialog-button"><i
+    class="bi bi-pencil-square"></i>
+  </button>
   <div class="user-info-content"></div>
   <div class="user-login-dialog-buttons">
     <button type="button" id="logout-button">Kirjaudu ulos</button>
   </div>
+</dialog>
+
+
+<dialog id="user-edit-dialog" class="user-login-dialog">
+  <h2>Edit user info</h2>
+  <button id="close-user-edit-dialog-button"
+          class="close-user-login-dialog-button"><i class="bi bi-x-lg"></i>
+  </button>
+  <form id="user-edit-form">
+    <div class="user-info-content"></div>
+    <div class="user-login-dialog-buttons">
+      <button type="submit" id="save-user-edit-button">Save changes</button>
+    </div>
+  </form>
 </dialog>
 
 

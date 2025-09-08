@@ -1,16 +1,22 @@
 .user-info-content {
   display: flex;
-  flex-direction: column;
-  /* gap: 16px; */
+  flex-direction: row;
+  gap: 8px;
 }
 
-.user-info-content div {
+.user-info-content > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.user-info-content > div > div {
   display: flex;
   flex-direction: row;
   gap: 4px;
 }
 
-.user-info-content div p:first-child {
+.user-info-content > div > div > p:first-child {
   font-weight: bold;
 }
 

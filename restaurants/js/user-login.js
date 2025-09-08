@@ -62,6 +62,7 @@ function GetCurrentUserByToken(token) {
       if (res.status !== 200) {
         throw new Error('Server error. Try again later!');
       }
+      console.log('GetCurrentUserByToken', data);
       return data;
     })
     .catch((error) => {
@@ -174,6 +175,7 @@ function logoutUser() {
   currentUser = null;
   isUserLoggedIn = false;
   updateUserUI();
+  document.getElementById('user-info-dialog').close();
   alert('You have logged out');
 }
 
